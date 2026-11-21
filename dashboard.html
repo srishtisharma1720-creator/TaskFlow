@@ -1,0 +1,291 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard | TaskFlow{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<header class="topbar">
+    <div>
+        <h1>Dashboard</h1>
+        <p class="muted">Here's what's happening with your tasks.</p>
+    </div>
+    <span class="date-label" id="todayDate"></span>
+</header>
+
+<!-- Welcome Section -->
+<section class="welcome-banner">
+    <div>
+        <h2>Welcome back, {{ session.get('username', 'User') }}!</h2>
+        <p>Stay organized and get things done.</p>
+    </div>
+</section>
+
+<!-- Statistics -->
+<section class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-icon blue">▦</div>
+        <div>
+            <p>Total Tasks</p>
+            <h2>{{ counts.total or 0 }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon green">✓</div>
+        <div>
+            <p>Completed</p>
+            <h2>{{ counts.completed or 0 }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon orange">◷</div>
+        <div>
+            <p>In Progress</p>
+            <h2>{{ counts.progress or 0 }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon red">!</div>
+        <div>
+            <p>Overdue</p>
+            <h2>{{ counts.overdue or 0 }}</h2>
+        </div>
+    </div>
+
+</section>
+
+<!-- Overall Progress -->
+<section class="panel">
+    <div class="section-heading">
+        <h2>Overall Progress</h2>
+        <strong>{{ completion_rate or 0 }}%</strong>
+    </div>
+
+    <div class="progress-track">
+        <div class="progress-fill"
+             style="width: {{ completion_rate or 0 }}%;">
+        </div>
+    </div>
+
+    <p class="muted">Your overall task completion progress.</p>
+</section>
+
+<!-- Add Task -->
+<section class="panel">
+    <div class="section-heading">
+        <h2>Add New Task</h2>
+    </div>
+
+    <form action="{{ url_for('add_task') }}" method="POST">
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Task Title</label>
+                <input type="text"
+                       name="title"
+                       placeholder="Enter task title"
+                       maxlength="150"
+                       required>
+            </div>
+
+            <div class="field">
+                <label>Priority</label>
+                <select name="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Due Date</label>
+                <input type="date" name="due_date">
+            </div>
+
+            <div class="field">
+                <label>Status</label>
+                <select name="status">
+                    <option value="To Do">To Do</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Review">Review</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+            <div class="field wide">
+                <label>Description</label>
+                <textarea name="description"
+                          placeholder="Enter task description"></textarea>
+            </div>
+
+        </div>
+
+        <button type="submit" class="primary-button">
+            + Add Task
+        </button>
+
+    </form>
+</section>
+
+<!-- My Tasks -->
+<section class="panel">
+
+    <div class="section-heading">
+        <div>
+            <h2>My Tasks</h2>
+            <p class="muted">Manage and track your tasks.</p>
+        </div>
+
+        <!-- Filtered Task Count -->
+        <span class="task-count">
+            {{ tasks|length }} Matching Tasks
+        </span>
+    </div>
+
+    <!-- Search and Filters -->
+    <form action="{{ url_for('dashboard') }}"
+          method="GET"
+          class="filter-form">
+
+        <input type="text"
+               name="search"
+               placeholder="Search tasks..."
+               value="{{ search or '' }}">
+
+        <select name="status">
+            <option value="">All Status</option>
+            <option value="To Do"
+                {% if selected_status == 'To Do' %}selected{% endif %}>
+                To Do
+            </option>
+            <option value="In Progress"
+                {% if selected_status == 'In Progress' %}selected{% endif %}>
+                In Progress
+            </option>
+            <option value="Review"
+                {% if selected_status == 'Review' %}selected{% endif %}>
+                Review
+            </option>
+            <option value="Completed"
+                {% if selected_status == 'Completed' %}selected{% endif %}>
+                Completed
+            </option>
+        </select>
+
+        <select name="priority">
+            <option value="">All Priorities</option>
+            <option value="Low"
+                {% if selected_priority == 'Low' %}selected{% endif %}>
+                Low
+            </option>
+            <option value="Medium"
+                {% if selected_priority == 'Medium' %}selected{% endif %}>
+                Medium
+            </option>
+            <option value="High"
+                {% if selected_priority == 'High' %}selected{% endif %}>
+                High
+            </option>
+        </select>
+
+        <button type="submit" class="primary-button">Apply</button>
+
+        <a href="{{ url_for('dashboard') }}"
+           class="secondary-button">
+            Clear
+        </a>
+
+    </form>
+
+    <!-- Task List -->
+    <div class="task-list">
+
+        {% for task in tasks %}
+
+        <div class="task-item">
+
+            <div class="task-main">
+                <h3>{{ task['title'] }}</h3>
+
+                <p>
+                    {{ task['description'] or 'No description provided.' }}
+                </p>
+
+                <div class="task-meta">
+
+                    <span class="priority {{ task['priority']|lower }}">
+                        {{ task['priority'] }} Priority
+                    </span>
+
+                    <span class="status {{ task['status']|lower|replace(' ', '-') }}">
+                        {{ task['status'] }}
+                    </span>
+
+                    {% if task['due_date'] %}
+                    <span class="due-date">
+                        Due: {{ task['due_date'] }}
+                    </span>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <div class="task-actions">
+
+                <a href="{{ url_for('edit_task', task_id=task['id']) }}"
+                   class="secondary-button">
+                    Edit
+                </a>
+
+                <form action="{{ url_for('delete_task', task_id=task['id']) }}"
+                      method="POST"
+                      onsubmit="return confirm('Are you sure you want to delete this task?');">
+
+                    <button type="submit" class="delete-button">
+                        Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+            {% if counts.total > 0 %}
+
+            <div class="empty-state">
+                <div class="empty-icon">⌕</div>
+                <h3>No Matching Tasks</h3>
+                <p>No tasks match your current search or filters.</p>
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="action-link">
+                    Clear Filters
+                </a>
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+                <div class="empty-icon">✓</div>
+                <h3>No Tasks Yet</h3>
+                <p>Create your first task using the form above.</p>
+            </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

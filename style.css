@@ -1,0 +1,1757 @@
+
+/* ==========================================================
+   TASKFLOW PREMIUM - SOFTWARE ENGINEERING PORTFOLIO
+   Dark Navy + Purple | Extra Large UI | Responsive
+   Compatible with existing Flask HTML class names
+========================================================== */
+
+/* ================= 1. DESIGN SYSTEM ================= */
+
+:root {
+    --primary: #8668ff;
+    --primary-dark: #7050ef;
+    --primary-light: #eee9ff;
+    --accent: #ae96ff;
+
+    --background: #101225;
+    --surface: #191b32;
+    --surface-light: #22243e;
+    --surface-hover: #292b49;
+
+    --text: #f5f3ff;
+    --muted: #aaaac4;
+    --border: #30324e;
+
+    --success: #36c99a;
+    --warning: #ffbd68;
+    --danger: #ff7185;
+    --blue: #72a9ff;
+
+    --sidebar: #111327;
+    --sidebar-light: #222440;
+
+    --shadow: 0 12px 35px rgba(0,0,0,0.20);
+    --radius: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.7;
+    transition: background .3s ease, color .3s ease;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    transition: .25s ease;
+}
+
+/* ================= 2. MAIN LAYOUT ================= */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ================= 3. SIDEBAR ================= */
+
+.sidebar {
+    width: 300px;
+    min-width: 300px;
+    min-height: 100vh;
+    height: 100vh;
+
+    padding: 34px 23px;
+
+    background: linear-gradient(
+        180deg,
+        #111327 0%,
+        #171931 55%,
+        #211d40 100%
+    );
+
+    border-right: 1px solid #292a47;
+
+    display: flex;
+    flex-direction: column;
+
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    overflow-y: auto;
+
+    box-shadow: 8px 0 35px rgba(0,0,0,.14);
+}
+
+/* BRAND */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 33px;
+    font-weight: 900;
+    letter-spacing: -1px;
+
+    color: #ffffff;
+
+    margin-bottom: 65px;
+}
+
+.brand-icon {
+    width: 56px;
+    height: 56px;
+
+    background: linear-gradient(
+        135deg,
+        #7958f6,
+        #ad91ff
+    );
+
+    color: white;
+
+    border-radius: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 29px;
+    font-weight: 900;
+
+    flex-shrink: 0;
+
+    box-shadow: 0 8px 25px rgba(121,88,246,.35);
+}
+
+/* NAVIGATION LABEL */
+
+.nav-label {
+    color: #8989b2;
+
+    font-size: 14px;
+    font-weight: 850;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    margin: 0 0 20px 12px;
+}
+
+/* NAVIGATION */
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+
+    padding: 18px 17px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    color: #c1c0dd;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    border: 1px solid transparent;
+
+    transition: .25s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background: rgba(139,116,255,.14);
+    border-color: rgba(166,145,255,.15);
+    transform: translateX(5px);
+}
+
+.nav-link.active {
+    color: white;
+
+    background: linear-gradient(
+        110deg,
+        #6d50e9,
+        #9477ff
+    );
+
+    border-color: rgba(255,255,255,.13);
+
+    box-shadow: 0 8px 25px rgba(115,85,245,.30);
+
+    font-weight: 800;
+}
+
+/* SIDEBAR BOTTOM */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* PROFILE */
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 23px 7px;
+
+    border-top: 1px solid rgba(255,255,255,.12);
+}
+
+.avatar {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 17px;
+
+    background: linear-gradient(
+        135deg,
+        #ad91ff,
+        #7053eb
+    );
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 850;
+
+    flex-shrink: 0;
+}
+
+.user-info strong {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.user-info small {
+    display: block;
+    font-size: 14px;
+    color: #aaa9c9;
+}
+
+/* THEME BUTTON */
+
+.theme-button,
+.logout-button {
+    width: 100%;
+
+    padding: 16px 17px;
+
+    border-radius: 13px;
+
+    font-size: 16px;
+    font-weight: 750;
+
+    text-align: left;
+
+    transition: .25s ease;
+}
+
+.theme-button {
+    border: 1px solid #393a5b;
+    background: #22243d;
+    color: #e6e2ff;
+}
+
+.theme-button:hover {
+    background: #333052;
+    border-color: #806aff;
+}
+
+/* LOGOUT */
+
+.logout-button {
+    border: 1px solid rgba(255,113,133,.20);
+    background: rgba(255,89,113,.10);
+    color: #ff9eaa;
+}
+
+.logout-button:hover {
+    background: rgba(255,89,113,.22);
+    color: white;
+}
+
+/* ================= 4. MAIN CONTENT ================= */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+
+    max-width: 1800px;
+
+    margin: 0 auto;
+
+    padding: 45px 52px;
+}
+
+/* TOP BAR */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 38px;
+}
+
+.topbar h1 {
+    color: #f5f3ff;
+
+    font-size: 42px;
+    font-weight: 900;
+
+    letter-spacing: -1.2px;
+}
+
+.muted {
+    color: #aaaac4;
+    font-size: 17px;
+}
+
+.date-label {
+    background: #1d1f38;
+    border: 1px solid #353650;
+
+    color: #d4d1eb;
+
+    padding: 14px 19px;
+
+    border-radius: 13px;
+
+    font-size: 16px;
+    font-weight: 650;
+
+    white-space: nowrap;
+}
+
+/* ================= 5. WELCOME BANNER ================= */
+
+.welcome-banner {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 195px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 43px;
+
+    margin-bottom: 35px;
+
+    color: white;
+
+    border-radius: 23px;
+
+    background: linear-gradient(
+        115deg,
+        #5942d4,
+        #795be9,
+        #a184f7
+    );
+
+    box-shadow: 0 14px 35px rgba(100,75,225,.24);
+}
+
+.welcome-banner::after {
+    content: "";
+
+    position: absolute;
+
+    width: 270px;
+    height: 270px;
+
+    right: 70px;
+    top: -160px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.09);
+
+    pointer-events: none;
+}
+
+.welcome-banner h2 {
+    font-size: 35px;
+    font-weight: 900;
+    margin-bottom: 9px;
+}
+
+.welcome-banner p {
+    color: #eee9ff;
+    font-size: 18px;
+}
+
+.welcome-symbol {
+    width: 86px;
+    height: 86px;
+
+    border-radius: 23px;
+
+    background: rgba(255,255,255,.18);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 47px;
+
+    flex-shrink: 0;
+}
+
+/* ================= 6. STATISTICS CARDS ================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0,1fr));
+
+    gap: 23px;
+
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    position: relative;
+
+    min-height: 205px;
+
+    padding: 29px;
+
+    background: linear-gradient(
+        145deg,
+        #20223c,
+        #191b31
+    );
+
+    border: 1px solid #333550;
+
+    border-radius: 21px;
+
+    box-shadow: var(--shadow);
+
+    transition: .25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #806bff;
+
+    box-shadow: 0 17px 35px rgba(0,0,0,.25);
+}
+
+.stat-icon {
+    width: 57px;
+    height: 57px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    font-size: 27px;
+    font-weight: 850;
+
+    margin-bottom: 20px;
+}
+
+.stat-icon.blue {
+    color: #80b4ff;
+    background: rgba(73,137,233,.16);
+}
+
+.stat-icon.green {
+    color: #55d7a8;
+    background: rgba(39,167,122,.16);
+}
+
+.stat-icon.orange {
+    color: #ffc579;
+    background: rgba(230,154,53,.16);
+}
+
+.stat-icon.red {
+    color: #ff8798;
+    background: rgba(227,94,113,.16);
+}
+
+.stat-card p {
+    color: #b4b3ce;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.stat-card h2 {
+    color: #ffffff;
+
+    font-size: 43px;
+    font-weight: 900;
+
+    margin: 5px 0;
+}
+
+.stat-card small {
+    color: #9998b6;
+    font-size: 14px;
+}
+
+/* ================= 7. PANELS ================= */
+
+.panel {
+    background: linear-gradient(
+        145deg,
+        #20223b,
+        #191b31
+    );
+
+    padding: 35px;
+
+    border: 1px solid #343650;
+
+    border-radius: 21px;
+
+    margin-bottom: 30px;
+
+    box-shadow: var(--shadow);
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 27px;
+}
+
+.section-heading h2 {
+    color: #f5f3ff;
+
+    font-size: 27px;
+    font-weight: 900;
+
+    margin-bottom: 5px;
+}
+
+.progress-number {
+    color: #b19aff;
+
+    font-size: 29px;
+    font-weight: 900;
+}
+
+/* ================= 8. PROGRESS BAR ================= */
+
+.progress-track {
+    width: 100%;
+    height: 17px;
+
+    background: #373952;
+
+    border-radius: 30px;
+    overflow: hidden;
+
+    margin: 23px 0 15px;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #795cf1,
+        #b29aff
+    );
+
+    border-radius: 30px;
+
+    transition: width .5s ease;
+
+    box-shadow: 0 0 14px rgba(155,126,255,.35);
+}
+
+/* ================= 9. FORMS ================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2,minmax(0,1fr));
+
+    gap: 25px;
+
+    margin-bottom: 26px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.field.wide {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    color: #e4e1f8;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+
+    min-height: 57px;
+
+    padding: 15px 18px;
+
+    background: #15172b;
+
+    border: 1px solid #414361;
+
+    border-radius: 13px;
+
+    color: #f5f3ff;
+
+    font-size: 17px;
+
+    outline: none;
+
+    transition: .25s ease;
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 125px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: #8585a3;
+}
+
+.field select option {
+    background: #20223c;
+    color: white;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: #9478ff;
+
+    background: #1c1d36;
+
+    box-shadow: 0 0 0 4px rgba(132,104,255,.15);
+}
+
+/* ================= 10. BUTTONS ================= */
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px 29px;
+
+    background: linear-gradient(
+        135deg,
+        #7254ed,
+        #9a7cff
+    );
+
+    color: white;
+
+    border: none;
+    border-radius: 13px;
+
+    font-size: 18px;
+    font-weight: 850;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 22px rgba(112,81,238,.22);
+
+    transition: .25s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 27px rgba(112,81,238,.35);
+}
+
+.secondary-button {
+    padding: 14px 21px;
+
+    border: 1px solid #514779;
+
+    background: #30284e;
+
+    color: #c9baff;
+
+    border-radius: 11px;
+
+    font-size: 16px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background: #413365;
+    color: white;
+}
+
+.clear-link {
+    color: #b3b0cc;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.clear-link:hover {
+    color: #b59cff;
+}
+
+/* ================= 11. SEARCH AND FILTER ================= */
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-bottom: 27px;
+}
+
+.filter-form input,
+.filter-form select {
+    min-height: 53px;
+
+    padding: 12px 16px;
+
+    background: #15172b;
+
+    border: 1px solid #414361;
+
+    border-radius: 12px;
+
+    color: #eeeeff;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.filter-form input {
+    flex: 1;
+    min-width: 170px;
+}
+
+.filter-form select {
+    min-width: 150px;
+}
+
+.filter-form input::placeholder {
+    color: #8585a3;
+}
+
+.filter-form input:focus,
+.filter-form select:focus {
+    border-color: #9478ff;
+}
+
+/* ================= 12. TASK COUNT ================= */
+
+.task-count {
+    display: inline-block;
+
+    background: rgba(134,104,255,.16);
+
+    color: #c1adff;
+
+    padding: 9px 16px;
+
+    border-radius: 22px;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+/* ================= 13. TASK CARDS ================= */
+
+.task-item {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 23px;
+
+    padding: 27px;
+
+    margin-bottom: 17px;
+
+    background: #191b31;
+
+    border: 1px solid #343650;
+
+    border-radius: 17px;
+
+    transition: .25s ease;
+}
+
+.task-item:hover {
+    background: #22243d;
+
+    border-color: #806bff;
+
+    transform: translateY(-3px);
+}
+
+.task-main {
+    min-width: 0;
+}
+
+.task-main h3 {
+    color: #f4f1ff;
+
+    font-size: 22px;
+    font-weight: 850;
+
+    margin-bottom: 8px;
+
+    overflow-wrap: anywhere;
+}
+
+.task-main p {
+    color: #b2b0ca;
+
+    font-size: 17px;
+
+    line-height: 1.75;
+
+    overflow-wrap: anywhere;
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 17px;
+}
+
+.priority,
+.status {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border-radius: 22px;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.priority.low {
+    color: #62ddb2;
+    background: rgba(39,167,122,.16);
+}
+
+.priority.medium {
+    color: #ffca80;
+    background: rgba(230,154,53,.16);
+}
+
+.priority.high {
+    color: #ff91a0;
+    background: rgba(227,94,113,.16);
+}
+
+.status.to-do {
+    color: #c2c4da;
+    background: #34364c;
+}
+
+.status.in-progress {
+    color: #8cbaff;
+    background: rgba(73,137,233,.17);
+}
+
+.status.review {
+    color: #c6a5ff;
+    background: rgba(145,97,203,.18);
+}
+
+.status.completed {
+    color: #65ddb0;
+    background: rgba(39,167,122,.17);
+}
+
+/* TASK ACTIONS */
+
+.task-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    flex-shrink: 0;
+}
+
+.task-actions form {
+    margin: 0;
+}
+
+.action-link,
+.delete-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 17px;
+
+    border-radius: 10px;
+
+    border: 1px solid transparent;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.action-link {
+    background: rgba(134,104,255,.16);
+    color: #c3b0ff;
+    border-color: rgba(134,104,255,.2);
+}
+
+.action-link:hover {
+    background: #7054df;
+    color: white;
+}
+
+.delete-button {
+    background: rgba(228,92,112,.13);
+    color: #ff9ba8;
+    border-color: rgba(228,92,112,.18);
+}
+
+.delete-button:hover {
+    background: #d94f66;
+    color: white;
+}
+
+/* ================= 14. EMPTY STATE ================= */
+
+.empty-state {
+    text-align: center;
+
+    padding: 65px 25px;
+
+    color: #aaaac4;
+}
+
+.empty-icon {
+    width: 82px;
+    height: 82px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 24px;
+
+    background: rgba(134,104,255,.16);
+
+    color: #ae96ff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 40px;
+}
+
+.empty-state h3 {
+    color: #f0edff;
+
+    font-size: 25px;
+    font-weight: 850;
+
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 17px;
+}
+
+/* ================= 15. FLASH MESSAGES ================= */
+
+.flash {
+    padding: 17px 21px;
+
+    margin-bottom: 22px;
+
+    border-radius: 13px;
+
+    font-size: 17px;
+    font-weight: 650;
+}
+
+.flash.success {
+    background: rgba(39,167,122,.15);
+    border: 1px solid rgba(39,167,122,.28);
+    color: #75e4b9;
+}
+
+.flash.error,
+.flash.danger {
+    background: rgba(228,92,112,.14);
+    border: 1px solid rgba(228,92,112,.25);
+    color: #ff9ca9;
+}
+
+/* ================= 16. LOGIN AND REGISTER ================= */
+
+.auth-page {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 45px 22px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(117,82,242,.23),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(151,104,255,.17),
+            transparent 35%
+        ),
+        #101225;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 540px;
+
+    background: #1b1d35;
+
+    padding: 55px 49px;
+
+    border: 1px solid #383957;
+
+    border-radius: 26px;
+
+    box-shadow: 0 25px 70px rgba(0,0,0,.30);
+
+    text-align: center;
+}
+
+.auth-logo {
+    width: 88px;
+    height: 88px;
+
+    margin: 0 auto 27px;
+
+    border-radius: 25px;
+
+    background: linear-gradient(
+        135deg,
+        #7050ed,
+        #a38aff
+    );
+
+    color: white;
+
+    font-size: 48px;
+    font-weight: 900;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 10px 27px rgba(112,80,237,.30);
+}
+
+.auth-card h1 {
+    font-size: 40px;
+    font-weight: 900;
+
+    color: #ffffff;
+
+    margin-bottom: 11px;
+}
+
+.auth-subtitle {
+    font-size: 18px;
+    color: #b8b6d0;
+    margin-bottom: 36px;
+}
+
+.auth-card form {
+    text-align: left;
+}
+
+.auth-field {
+    margin-bottom: 25px;
+}
+
+.auth-field label {
+    display: block;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    color: #e6e3fa;
+
+    margin-bottom: 11px;
+}
+
+.auth-field input {
+    width: 100%;
+    height: 61px;
+
+    padding: 0 18px;
+
+    border: 1px solid #414361;
+
+    border-radius: 13px;
+
+    background: #131529;
+
+    color: white;
+
+    font-size: 17px;
+
+    outline: none;
+
+    transition: .25s ease;
+}
+
+.auth-field input::placeholder {
+    color: #8585a3;
+}
+
+.auth-field input:focus {
+    border-color: #9478ff;
+
+    background: #1c1e37;
+
+    box-shadow: 0 0 0 4px rgba(134,104,255,.15);
+}
+
+.auth-field small {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #a4a2be;
+
+    font-size: 14px;
+}
+
+.auth-button {
+    width: 100%;
+    min-height: 62px;
+
+    margin-top: 13px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        135deg,
+        #7050ed,
+        #9b7cff
+    );
+
+    color: white;
+
+    font-size: 19px;
+    font-weight: 850;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.auth-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 11px 27px rgba(112,80,237,.32);
+}
+
+.auth-footer {
+    margin-top: 29px;
+
+    font-size: 17px;
+
+    color: #b8b6d0;
+}
+
+.auth-footer a {
+    color: #b49dff;
+
+    font-weight: 850;
+
+    text-decoration: none;
+
+    margin-left: 5px;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.auth-bottom {
+    border-top: 1px solid #383957;
+
+    margin-top: 31px;
+
+    padding-top: 20px;
+
+    font-size: 15px;
+
+    color: #9695b2;
+}
+
+.auth-card .flash {
+    margin-bottom: 22px;
+}
+
+/* ================= 17. EDIT PAGE ================= */
+
+.edit-panel {
+    max-width: 1000px;
+}
+
+/* ================= 18. DARK MODE ================= */
+
+/* Explicitly retain the existing body.dark theme
+   class used by your theme toggle. */
+
+body.dark {
+    background: #101225;
+    color: #f5f3ff;
+}
+
+body.dark .sidebar {
+    background: linear-gradient(
+        180deg,
+        #111327,
+        #171931,
+        #211d40
+    );
+}
+
+body.dark .panel,
+body.dark .stat-card,
+body.dark .task-item,
+body.dark .date-label {
+    background: #20223b;
+    border-color: #343650;
+}
+
+body.dark .brand,
+body.dark .topbar h1,
+body.dark .section-heading h2,
+body.dark .stat-card h2,
+body.dark .task-main h3,
+body.dark .empty-state h3,
+body.dark .user-info strong {
+    color: #ffffff;
+}
+
+body.dark .nav-link {
+    color: #c1c0dd;
+}
+
+body.dark .nav-link.active,
+body.dark .nav-link:hover {
+    color: #ffffff;
+}
+
+body.dark .field label {
+    color: #e4e1f8;
+}
+
+body.dark .field input,
+body.dark .field select,
+body.dark .field textarea,
+body.dark .filter-form input,
+body.dark .filter-form select {
+    background: #15172b;
+    color: #ffffff;
+    border-color: #414361;
+}
+
+body.dark .theme-button {
+    background: #22243d;
+    color: #e6e2ff;
+    border-color: #393a5b;
+}
+
+body.dark .user-info {
+    border-color: #42445c;
+}
+
+body.dark .task-item:hover {
+    background: #292b49;
+}
+
+body.dark .auth-page {
+    background: #101225;
+}
+
+body.dark .auth-card {
+    background: #1b1d35;
+}
+
+body.dark .auth-card h1,
+body.dark .auth-field label {
+    color: #ffffff;
+}
+
+body.dark .auth-field input {
+    background: #131529;
+    color: white;
+    border-color: #414361;
+}
+
+body.dark .auth-subtitle,
+body.dark .auth-footer,
+body.dark .auth-bottom {
+    color: #b8b6d0;
+}
+
+/* ================= 19. INTERACTION ================= */
+
+button,
+a,
+.stat-card,
+.task-item,
+.nav-link {
+    transition: all .25s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(151,124,255,.65);
+    outline-offset: 3px;
+}
+
+/* ================= 20. TABLET ================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 260px;
+        min-width: 260px;
+        padding: 27px 18px;
+    }
+
+    .brand {
+        font-size: 28px;
+    }
+
+    .nav-link {
+        font-size: 17px;
+    }
+
+    .main-content {
+        padding: 32px 26px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .topbar h1 {
+        font-size: 36px;
+    }
+}
+
+/* ================= 21. MOBILE ================= */
+
+@media (max-width: 750px) {
+
+    .app-layout {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        min-width: 0;
+
+        height: auto;
+        min-height: auto;
+
+        padding: 22px 19px;
+
+        overflow: visible;
+    }
+
+    .brand {
+        font-size: 29px;
+        margin-bottom: 28px;
+    }
+
+    .sidebar nav {
+        gap: 9px;
+    }
+
+    .nav-link {
+        padding: 15px;
+        font-size: 17px;
+    }
+
+    .sidebar-bottom {
+        margin-top: 25px;
+    }
+
+    .main-content {
+        padding: 25px 17px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .topbar h1 {
+        font-size: 33px;
+    }
+
+    .welcome-banner {
+        padding: 29px;
+        min-height: 155px;
+    }
+
+    .welcome-banner h2 {
+        font-size: 27px;
+    }
+
+    .welcome-symbol {
+        width: 62px;
+        height: 62px;
+        font-size: 34px;
+    }
+
+    .section-heading h2 {
+        font-size: 23px;
+    }
+
+    .task-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .task-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .task-actions form {
+        max-width: 100%;
+    }
+}
+
+/* ================= 22. SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+
+    body {
+        font-size: 16px;
+    }
+
+    .main-content {
+        padding: 20px 13px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 12px;
+    }
+
+    .stat-card {
+        min-height: 165px;
+        padding: 17px;
+    }
+
+    .stat-card h2 {
+        font-size: 30px;
+    }
+
+    .stat-card p {
+        font-size: 14px;
+    }
+
+    .stat-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+
+    .panel {
+        padding: 21px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.wide {
+        grid-column: auto;
+    }
+
+    .filter-form {
+        flex-direction: column;
+    }
+
+    .filter-form input,
+    .filter-form select {
+        width: 100%;
+    }
+
+    .auth-card {
+        padding: 35px 23px;
+    }
+
+    .auth-card h1 {
+        font-size: 31px;
+    }
+
+    .welcome-banner {
+        padding: 22px;
+    }
+
+    .welcome-banner h2 {
+        font-size: 23px;
+    }
+
+    .task-item {
+        padding: 19px;
+    }
+
+    .task-main h3 {
+        font-size: 19px;
+    }
+
+    .task-actions {
+        gap: 8px;
+    }
+}
+
+/* ================= 23. ACCESSIBILITY ================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+
+
+/* =====================================
+   TASKFLOW THEME SWITCHING FIX
+===================================== */
+
+/* LIGHT MODE */
+
+body:not(.dark) {
+    background: #f4f5fc;
+    color: #252640;
+}
+
+body:not(.dark) .sidebar {
+    background: #ffffff;
+    border-color: #e5e6f0;
+}
+
+body:not(.dark) .brand,
+body:not(.dark) .topbar h1,
+body:not(.dark) .section-heading h2,
+body:not(.dark) .stat-card h2,
+body:not(.dark) .task-main h3,
+body:not(.dark) .empty-state h3,
+body:not(.dark) .user-info strong {
+    color: #252640;
+}
+
+body:not(.dark) .nav-link {
+    color: #62647d;
+}
+
+body:not(.dark) .nav-link:hover {
+    background: #eeeaff;
+    color: #7050ed;
+}
+
+body:not(.dark) .nav-link.active {
+    background: linear-gradient(110deg, #7050e9, #9477ff);
+    color: white;
+}
+
+body:not(.dark) .panel,
+body:not(.dark) .stat-card,
+body:not(.dark) .task-item {
+    background: #ffffff;
+    border-color: #e6e7f0;
+}
+
+body:not(.dark) .stat-card p,
+body:not(.dark) .muted,
+body:not(.dark) .task-main p,
+body:not(.dark) .empty-state {
+    color: #777990;
+}
+
+body:not(.dark) .date-label {
+    background: #ffffff;
+    color: #55566e;
+    border-color: #e5e6f0;
+}
+
+body:not(.dark) .field label {
+    color: #45465f;
+}
+
+body:not(.dark) .field input,
+body:not(.dark) .field select,
+body:not(.dark) .field textarea,
+body:not(.dark) .filter-form input,
+body:not(.dark) .filter-form select {
+    background: #fafaff;
+    color: #303149;
+    border-color: #dedfeb;
+}
+
+body:not(.dark) .user-info {
+    border-color: #eeeeF5;
+}
+
+body:not(.dark) .theme-button {
+    background: #eeeaff;
+    color: #6558df;
+    border-color: #e2ddff;
+}
+
+body:not(.dark) .empty-icon {
+    background: #eeeaff;
+    color: #6559df;
+}
+
+body:not(.dark) .auth-page {
+    background: linear-gradient(135deg, #e9edff, #f5eaff, #e8f5ff);
+}
+
+body:not(.dark) .auth-card {
+    background: #ffffff;
+    border-color: #eeeeF5;
+}
+
+body:not(.dark) .auth-card h1,
+body:not(.dark) .auth-field label {
+    color: #252640;
+}
+
+body:not(.dark) .auth-subtitle,
+body:not(.dark) .auth-footer {
+    color: #777990;
+}
+
+body:not(.dark) .auth-field input {
+    background: #fafaff;
+    color: #252640;
+    border-color: #dedfeb;
+}
+
+body:not(.dark) .auth-bottom {
+    color: #88899e;
+    border-color: #eeeeF5;
+}
